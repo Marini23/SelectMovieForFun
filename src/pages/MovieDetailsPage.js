@@ -1,8 +1,8 @@
 import { fetchMovieDetailsById } from 'api';
 import { Loader } from 'components/Loader';
 import { MovieDetails } from 'components/MovieDetails';
-import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 export const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -22,7 +22,6 @@ export const MovieDetailsPage = () => {
         setLoading(true);
         setError(false);
         const movie = await fetchMovieDetailsById(movieId);
-        console.log(movie);
         setMovieDetails(movie);
       } catch (error) {
         setError(true);
@@ -31,17 +30,31 @@ export const MovieDetailsPage = () => {
       }
     }
     getMovieDetails();
-    console.log(movieDetails);
-  }, [movieDetails]);
-
+  }, [movieId]);
   return (
     <div>
       <Link to={goBackLink.current} state={{ from: location }}>
-        Back to Movies
+        Go Back
       </Link>
       <MovieDetails movieDetails={movieDetails} />
+      <h4>Additional information</h4>
+      <ul>
+        <li>
+          <Link to={`cast`} state={location.state}>
+            Cast
+          </Link>
+        </li>
+        <li>
+          <Link to={`reviews`} state={location.state}>
+            Reviews
+          </Link>
+        </li>
+      </ul>
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

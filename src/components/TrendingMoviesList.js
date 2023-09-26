@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router-dom';
-import { MovieDetais } from './MovieDetails';
 
 export const TrendingMoviesList = ({ trendingMovies }) => {
   const location = useLocation();

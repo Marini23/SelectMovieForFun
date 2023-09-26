@@ -1,34 +1,39 @@
-import { fetchTrendingMovies } from 'api';
+import { fetchMovieCastById } from 'api';
+import { Cast } from 'components/Cast';
 import { Loader } from 'components/Loader';
-import { TrendingMoviesList } from 'components/TrendingMoviesList';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-export default function HomePage() {
-  const [trendingMovies, setTrendingMovies] = useState([]);
+export const MovieCastPage = () => {
+  const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [movieCast, setMovieCast] = useState([]);
 
   useEffect(() => {
-    async function getTreningMovies() {
+    async function getMovieCast() {
       try {
+        if (!movieId) {
+          return;
+        }
         setLoading(true);
         setError(false);
-        const movies = await fetchTrendingMovies();
-        setTrendingMovies(movies);
+        const cast = await fetchMovieCastById(movieId);
+        setMovieCast(cast);
       } catch (error) {
         setError(true);
       } finally {
         setLoading(false);
       }
     }
-    getTreningMovies();
-  }, []);
+    getMovieCast();
+  }, [movieId]);
 
   return (
     <div>
-      <TrendingMoviesList trendingMovies={trendingMovies} />
+      {movieCast && <Cast movieCast={movieCast} />}
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
     </div>
   );
-}
+};
