@@ -1,6 +1,6 @@
-import { fetchMovieReviewsById } from 'api';
+import { fetchMovieReviewsById } from 'pages/api';
 import { Loader } from 'components/Loader';
-import { Reviews } from 'components/Reviews';
+import { Reviews } from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ export const MovieReviewsPage = () => {
   }, [movieId]);
   return (
     <div>
-      {movieReviews ? (
+      {movieReviews.length > 0 ? (
         <Reviews movieReviews={movieReviews} />
       ) : (
         <div>We don't have any reviews for this movie</div>

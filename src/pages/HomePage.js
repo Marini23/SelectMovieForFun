@@ -1,6 +1,6 @@
-import { fetchTrendingMovies } from 'api';
+import { fetchTrendingMovies } from 'pages/api';
 import { Loader } from 'components/Loader';
-import { TrendingMoviesList } from 'components/TrendingMoviesList';
+import { TrendingMoviesList } from 'components/TrendingMoviesList/TrendingMoviesList';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
@@ -26,6 +26,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <h1>Trending today</h1>
       <TrendingMoviesList trendingMovies={trendingMovies} />
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
