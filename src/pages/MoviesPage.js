@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { fetchMoviesByQuery } from './api';
 import { SearchBar } from 'components/SearchBar/SearchBar';
-import { TrendingMoviesList } from 'components/TrendingMoviesList/TrendingMoviesList';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Loader } from 'components/Loader';
 
 export default function MoviesPage() {
@@ -40,7 +40,7 @@ export default function MoviesPage() {
     <div>
       <SearchBar onChange={onChangeParams} />
       {moviesByQuery.length > 0 && (
-        <TrendingMoviesList trendingMovies={moviesByQuery} />
+        <MoviesList trendingMovies={moviesByQuery} />
       )}
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}

@@ -1,5 +1,5 @@
 import { GlobalStyle } from 'GlobalStyle';
-import HomePage from 'pages/HomePage';
+import HomePage from 'pages/HomePage/HomePage';
 import { MovieCastPage } from 'pages/MovieCastPage';
 
 import { MovieDetailsPage } from 'pages/MovieDetailsPage';

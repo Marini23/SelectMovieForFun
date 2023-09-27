@@ -1,7 +1,8 @@
 import { fetchTrendingMovies } from 'pages/api';
 import { Loader } from 'components/Loader';
-import { TrendingMoviesList } from 'components/TrendingMoviesList/TrendingMoviesList';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
+import { WrapperHomePage } from './HomePage.styled';
 
 export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -25,11 +26,11 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div>
+    <WrapperHomePage>
       <h1>Trending today</h1>
-      <TrendingMoviesList trendingMovies={trendingMovies} />
+      <MoviesList trendingMovies={trendingMovies} />
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
-    </div>
+    </WrapperHomePage>
   );
 }
