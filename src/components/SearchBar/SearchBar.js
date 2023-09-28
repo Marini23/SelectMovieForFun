@@ -1,3 +1,4 @@
+import { BiSearchAlt } from 'react-icons/bi';
 import { SearchForm, BtnSubmit, BtnLabel, Input } from './SearchBar.styled';
 
 export const SearchBar = ({ onChange }) => {
@@ -25,7 +26,9 @@ export const SearchBar = ({ onChange }) => {
         name="query"
       />
       <BtnSubmit type="submit" onSubmit={onSubmit}>
-        <BtnLabel>Search</BtnLabel>
+        <BtnLabel>
+          Search <BiSearchAlt size="24" />
+        </BtnLabel>
       </BtnSubmit>
     </SearchForm>
   );

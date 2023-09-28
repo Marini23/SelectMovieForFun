@@ -8,13 +8,12 @@ export const SearchForm = styled.form`
   width: 100%;
   max-width: 600px;
   background-color: #fff;
-  border-radius: 5px;
-  overflow: hidden;
+  border-radius: 3px;
 `;
 
 export const BtnSubmit = styled.button`
   display: inline-block;
-  width: 78px;
+  width: 120px;
   height: 48px;
   border: solid 1px black;
   outline: none;
@@ -31,11 +30,13 @@ export const BtnSubmit = styled.button`
 `;
 
 export const BtnLabel = styled.span`
-  width: 1px;
-  height: 1px;
+  display: flex;
   padding: 0;
   border: 0;
   color: #fff;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 `;
 
 export const Input = styled.input`

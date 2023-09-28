@@ -4,12 +4,15 @@ import { Reviews } from 'components/Reviews/Reviews';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const MovieReviewsPage = () => {
+export default function MovieReviewsPage() {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [movieReviews, setMovieReviews] = useState([]);
+
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     async function getMovieReviews() {
       try {
         if (!movieId) {
@@ -17,15 +20,20 @@ export const MovieReviewsPage = () => {
         }
         setLoading(true);
         setError(false);
-        const reviews = await fetchMovieReviewsById(movieId);
+        const reviews = await fetchMovieReviewsById(movieId, signal);
         setMovieReviews(reviews);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }
     }
     getMovieReviews();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
   return (
     <div>
@@ -38,4 +46,4 @@ export const MovieReviewsPage = () => {
       {error && !loading && <div>Oops... Something went wrong...</div>}
     </div>
   );
-};
+}

@@ -10,19 +10,27 @@ export default function HomePage() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     async function getTreningMovies() {
       try {
         setLoading(true);
         setError(false);
-        const movies = await fetchTrendingMovies();
+        const movies = await fetchTrendingMovies(signal);
         setTrendingMovies(movies);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }
     }
     getTreningMovies();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (

@@ -4,13 +4,15 @@ import { Loader } from 'components/Loader';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const MovieCastPage = () => {
+export default function MovieCastPage() {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [movieCast, setMovieCast] = useState([]);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     async function getMovieCast() {
       try {
         if (!movieId) {
@@ -18,15 +20,20 @@ export const MovieCastPage = () => {
         }
         setLoading(true);
         setError(false);
-        const cast = await fetchMovieCastById(movieId);
+        const cast = await fetchMovieCastById(movieId, signal);
         setMovieCast(cast);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }
     }
     getMovieCast();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (
@@ -36,4 +43,4 @@ export const MovieCastPage = () => {
       {error && !loading && <div>Oops... Something went wrong...</div>}
     </div>
   );
-};
+}

@@ -14,6 +14,8 @@ export default function MoviesPage() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     async function getMoviesByQuery() {
       try {
         if (!query) {
@@ -21,15 +23,20 @@ export default function MoviesPage() {
         }
         setLoading(true);
         setError(false);
-        const queryResults = await fetchMoviesByQuery(query);
+        const queryResults = await fetchMoviesByQuery(query, signal);
         setMoviesByQuery(queryResults);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        }
       } finally {
         setLoading(false);
       }
     }
     getMoviesByQuery();
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   const onChangeParams = query => {

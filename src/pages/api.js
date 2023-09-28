@@ -6,23 +6,24 @@ axios.defaults.params = {
   language: 'en-US',
 };
 
-export const fetchTrendingMovies = async () => {
-  const { data } = await axios.get('/trending/movie/day', {});
+export const fetchTrendingMovies = async signal => {
+  const { data } = await axios.get('/trending/movie/day', { signal });
   return data.results;
 };
 
-export const fetchMoviesByQuery = async (query, page) => {
+export const fetchMoviesByQuery = async (query, signal) => {
   const { data } = await axios.get('/search/movie', {
+    signal,
     params: {
       query: query,
-      page,
     },
   });
   return data.results;
 };
 
-export const fetchMovieDetailsById = async movieId => {
+export const fetchMovieDetailsById = async (movieId, signal) => {
   const { data } = await axios.get(`/movie/${movieId}`, {
+    signal,
     params: {
       id: movieId,
     },
@@ -30,8 +31,9 @@ export const fetchMovieDetailsById = async movieId => {
   return data;
 };
 
-export const fetchMovieCastById = async movieId => {
+export const fetchMovieCastById = async (movieId, signal) => {
   const { data } = await axios.get(`/movie/${movieId}/credits`, {
+    signal,
     params: {
       id: movieId,
     },
@@ -39,8 +41,9 @@ export const fetchMovieCastById = async movieId => {
   return data.cast;
 };
 
-export const fetchMovieReviewsById = async movieId => {
+export const fetchMovieReviewsById = async (movieId, signal) => {
   const { data } = await axios.get(`/movie/${movieId}/reviews`, {
+    signal,
     params: {
       id: movieId,
     },

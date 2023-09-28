@@ -11,7 +11,7 @@ import {
   StyledLinkCastReviews,
 } from './MoviedetailsPage.styled';
 
-export const MovieDetailsPage = () => {
+export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -21,6 +21,8 @@ export const MovieDetailsPage = () => {
   const goBackLink = useRef(location.state?.from ?? `/`);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     async function getMovieDetails() {
       try {
         if (!movieId) {
@@ -28,15 +30,20 @@ export const MovieDetailsPage = () => {
         }
         setLoading(true);
         setError(false);
-        const movie = await fetchMovieDetailsById(movieId);
+        const movie = await fetchMovieDetailsById(movieId, signal);
         setMovieDetails(movie);
       } catch (error) {
-        setError(true);
+        if (error.code !== 'ERR_CANCELED') {
+          setError(true);
+        };
       } finally {
         setLoading(false);
       }
     }
     getMovieDetails();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
   return (
     <WrapperMovieDetails>
@@ -64,4 +71,4 @@ export const MovieDetailsPage = () => {
       </Suspense>
     </WrapperMovieDetails>
   );
-};
+}

@@ -17,9 +17,11 @@ export const ActorName = styled.p`
   font-size: 20px;
   font-weight: 700;
   margin: 0;
+  text-align: center;
 `;
 
 export const ActorRole = styled.p`
+  text-align: center;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
