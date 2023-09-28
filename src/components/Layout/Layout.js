@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
-import { Wrapper, Header, StyledLink, List, ListItem } from './Layout.styled';
+import { Header, StyledLink, List, ListItem } from './Layout.styled';
 
 export const Layout = () => {
   return (
-    <Wrapper>
+    <div>
       <Header>
         <List>
           <ListItem>
@@ -20,6 +20,6 @@ export const Layout = () => {
         </List>
       </Header>
       <Outlet />
-    </Wrapper>
+    </div>
   );
 };

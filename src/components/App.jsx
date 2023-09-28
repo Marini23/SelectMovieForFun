@@ -2,11 +2,11 @@ import { GlobalStyle } from 'GlobalStyle';
 import HomePage from 'pages/HomePage/HomePage';
 import { MovieCastPage } from 'pages/MovieCastPage';
 
-import { MovieDetailsPage } from 'pages/MovieDetailsPage';
+import { MovieDetailsPage } from 'pages/MovieDetailsPage/MovieDetailsPage';
 import { MovieReviewsPage } from 'pages/MovieReviewsPage';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
-import MoviesPage from 'pages/MoviesPage';
+import MoviesPage from 'pages/MoviePage/MoviesPage';
 
 export const App = () => {
   return (

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { fetchMoviesByQuery } from './api';
+import { fetchMoviesByQuery } from '../api';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { Loader } from 'components/Loader';
+import { WrapperMoviePage } from './MoviePage.styled';
 
 export default function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams(``);
@@ -37,13 +38,13 @@ export default function MoviesPage() {
     setSearchParams({ searchParams });
   };
   return (
-    <div>
+    <WrapperMoviePage>
       <SearchBar onChange={onChangeParams} />
       {moviesByQuery.length > 0 && (
         <MoviesList trendingMovies={moviesByQuery} />
       )}
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
-    </div>
+    </WrapperMoviePage>
   );
 }

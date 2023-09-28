@@ -3,6 +3,13 @@ import { Loader } from 'components/Loader';
 import { MovieDetails } from 'components/MovieDetails/MovieDetails';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import {
+  WrapperMovieDetails,
+  StyledLinkGoBack,
+  TitleInfo,
+  ListCastReviews,
+  StyledLinkCastReviews,
+} from './MoviedetailsPage.styled';
 
 export const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -32,29 +39,29 @@ export const MovieDetailsPage = () => {
     getMovieDetails();
   }, [movieId]);
   return (
-    <div>
-      <Link to={goBackLink.current} state={{ from: location }}>
+    <WrapperMovieDetails>
+      <StyledLinkGoBack to={goBackLink.current} state={{ from: location }}>
         Go Back
-      </Link>
+      </StyledLinkGoBack>
       <MovieDetails movieDetails={movieDetails} />
-      <h4>Additional information</h4>
-      <ul>
+      <TitleInfo>Additional information</TitleInfo>
+      <ListCastReviews>
         <li>
-          <Link to={`cast`} state={location.state}>
+          <StyledLinkCastReviews to={`cast`} state={location.state}>
             Cast
-          </Link>
+          </StyledLinkCastReviews>
         </li>
         <li>
-          <Link to={`reviews`} state={location.state}>
+          <StyledLinkCastReviews to={`reviews`} state={location.state}>
             Reviews
-          </Link>
+          </StyledLinkCastReviews>
         </li>
-      </ul>
+      </ListCastReviews>
       {loading && <Loader />}
       {error && !loading && <div>Oops... Something went wrong...</div>}
       <Suspense>
         <Outlet />
       </Suspense>
-    </div>
+    </WrapperMovieDetails>
   );
 };

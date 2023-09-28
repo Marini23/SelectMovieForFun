@@ -1,3 +1,5 @@
+import { SearchForm, BtnSubmit, BtnLabel, Input } from './SearchBar.styled';
+
 export const SearchBar = ({ onChange }) => {
   const onSubmit = evt => {
     evt.preventDefault();
@@ -14,19 +16,17 @@ export const SearchBar = ({ onChange }) => {
   };
 
   return (
-    <div>
-      <form>
-        <button type="submit" onSubmit={onSubmit}>
-          <span>Search</span>
-        </button>
-        <input
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search movie"
-          name="query"
-        />
-      </form>
-    </div>
+    <SearchForm>
+      <Input
+        type="text"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search movie"
+        name="query"
+      />
+      <BtnSubmit type="submit" onSubmit={onSubmit}>
+        <BtnLabel>Search</BtnLabel>
+      </BtnSubmit>
+    </SearchForm>
   );
 };

@@ -1,3 +1,5 @@
+import { MovieDetailsW, Title, SubTitle, Text } from './MovieDetails.styled';
+
 export const MovieDetails = ({ movieDetails }) => {
   const {
     title,
@@ -7,20 +9,20 @@ export const MovieDetails = ({ movieDetails }) => {
     release_date,
   } = movieDetails;
   return (
-    <div>
+    <MovieDetailsW>
       <img src={`https://image.tmdb.org/t/p/w300/${poster_path}`} alt={title} />
       <div>
-        <h2>{title}</h2>
-        <p>{release_date}</p>
-        <h3>Owerview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <p>
+        <Title>{title}</Title>
+        <Text>Release date: {release_date}</Text>
+        <SubTitle>Owerview</SubTitle>
+        <Text>{overview}</Text>
+        <SubTitle>Genres</SubTitle>
+        <Text>
           {genres.map((genre, i) => (
-            <span key={i}>{genre.name}</span>
+            <span key={i}> {genre.name} </span>
           ))}
-        </p>
+        </Text>
       </div>
-    </div>
+    </MovieDetailsW>
   );
 };

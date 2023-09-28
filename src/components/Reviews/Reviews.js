@@ -1,11 +1,12 @@
 import { ReviewCard } from './ReviewCard';
+import { ListReviews } from './Reviews.styled';
 
 export const Reviews = ({ movieReviews }) => {
   return (
-    <ul>
+    <ListReviews>
       {movieReviews.map(review => (
         <ReviewCard review={review} key={review.id} />
       ))}
-    </ul>
+    </ListReviews>
   );
 };

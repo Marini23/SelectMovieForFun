@@ -20,8 +20,11 @@ code {
     monospace;
 }
 
-h1 {
-margin-top: 0px;
+h1,
+h2,
+h3,
+h4 {
+margin-top: 15px;
 }
 
 
