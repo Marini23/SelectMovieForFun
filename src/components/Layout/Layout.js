@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { Header, StyledLink, List, ListItem } from './Layout.styled';
 

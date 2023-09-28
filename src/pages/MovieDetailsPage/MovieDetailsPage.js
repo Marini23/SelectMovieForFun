@@ -2,7 +2,7 @@ import { fetchMovieDetailsById } from 'pages/api';
 import { Loader } from 'components/Loader';
 import { MovieDetails } from 'components/MovieDetails/MovieDetails';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import {
   WrapperMovieDetails,
   StyledLinkGoBack,
