@@ -19,3 +19,7 @@ export const Text = styled.h2`
   font-size: 20px;
   font-weight: 400;
 `;
+export const Img = styled.img`
+  width: 300px;
+  height: 400px;
+`;

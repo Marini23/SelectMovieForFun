@@ -1,7 +1,7 @@
 import { BiSearchAlt } from 'react-icons/bi';
 import { SearchForm, BtnSubmit, BtnLabel, Input } from './SearchBar.styled';
 
-export const SearchBar = ({ onChange }) => {
+export const SearchBar = onSubmitParams => {
   const onSubmit = evt => {
     evt.preventDefault();
 
@@ -11,7 +11,7 @@ export const SearchBar = ({ onChange }) => {
       return;
     }
 
-    onChange(searchQuery);
+    onSubmitParams(searchQuery);
 
     evt.target.reset();
   };

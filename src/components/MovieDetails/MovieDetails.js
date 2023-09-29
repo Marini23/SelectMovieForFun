@@ -1,4 +1,12 @@
-import { MovieDetailsW, Title, SubTitle, Text } from './MovieDetails.styled';
+import {
+  MovieDetailsW,
+  Title,
+  SubTitle,
+  Text,
+  Img,
+} from './MovieDetails.styled';
+
+import defaultPoster from './default_image_no_poster.jpg';
 
 export const MovieDetails = ({ movieDetails }) => {
   const {
@@ -10,7 +18,14 @@ export const MovieDetails = ({ movieDetails }) => {
   } = movieDetails;
   return (
     <MovieDetailsW>
-      <img src={`https://image.tmdb.org/t/p/w300/${poster_path}`} alt={title} />
+      <Img
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w300/${poster_path}`
+            : defaultPoster
+        }
+        alt={title}
+      />
       <div>
         <Title>{title}</Title>
         <Text>Release date: {release_date}</Text>

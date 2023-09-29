@@ -8,19 +8,19 @@ import { WrapperMoviePage } from './MoviePage.styled';
 
 export default function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams(``);
-  const [query, setQuery] = useState(searchParams.get('query') ?? '');
   const [moviesByQuery, setMoviesByQuery] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const query = searchParams.get(`query`);
+    if (!query) {
+      return;
+    }
     const controller = new AbortController();
     const signal = controller.signal;
     async function getMoviesByQuery() {
       try {
-        if (!query) {
-          return;
-        }
         setLoading(true);
         setError(false);
         const queryResults = await fetchMoviesByQuery(query, signal);
@@ -37,16 +37,14 @@ export default function MoviesPage() {
     return () => {
       controller.abort();
     };
-  }, [query]);
+  }, [searchParams]);
 
-  const onChangeParams = query => {
-    setQuery(query);
-    searchParams.set('query', query);
-    setSearchParams({ searchParams });
+  const onSubmitParams = query => {
+    setSearchParams({ query });
   };
   return (
     <WrapperMoviePage>
-      <SearchBar onChange={onChangeParams} />
+      <SearchBar onSubmitParams={onSubmitParams} />
       {moviesByQuery.length > 0 && (
         <MoviesList trendingMovies={moviesByQuery} />
       )}

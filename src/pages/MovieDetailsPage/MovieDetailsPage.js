@@ -35,7 +35,7 @@ export default function MovieDetailsPage() {
       } catch (error) {
         if (error.code !== 'ERR_CANCELED') {
           setError(true);
-        };
+        }
       } finally {
         setLoading(false);
       }
@@ -50,7 +50,7 @@ export default function MovieDetailsPage() {
       <StyledLinkGoBack to={goBackLink.current} state={{ from: location }}>
         Go Back
       </StyledLinkGoBack>
-      <MovieDetails movieDetails={movieDetails} />
+      {movieDetails && <MovieDetails movieDetails={movieDetails} />}
       <TitleInfo>Additional information</TitleInfo>
       <ListCastReviews>
         <li>
